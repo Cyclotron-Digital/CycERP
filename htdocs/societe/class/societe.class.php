@@ -59,8 +59,16 @@ class Societe extends CommonObject
 	public $fk_element='fk_soc';
 
 	public $fieldsforcombobox='nom,name_alias';
-	protected $childtables=array("supplier_proposal"=>'SupplierProposal',"propal"=>'Proposal',"commande"=>'Order',"facture"=>'Invoice',"facture_rec"=>'RecurringInvoiceTemplate',"contrat"=>'Contract',"fichinter"=>'Fichinter',"facture_fourn"=>'SupplierInvoice',"commande_fournisseur"=>'SupplierOrder',"projet"=>'Project',"expedition"=>'Shipment',"prelevement_lignes"=>'DirectDebitRecord');    // To test if we can delete object
+
+	/**
+	 * @var array	List of child tables. To test if we can delete object.
+	 */
+	protected $childtables=array("supplier_proposal"=>'SupplierProposal',"propal"=>'Proposal',"commande"=>'Order',"facture"=>'Invoice',"facture_rec"=>'RecurringInvoiceTemplate',"contrat"=>'Contract',"fichinter"=>'Fichinter',"facture_fourn"=>'SupplierInvoice',"commande_fournisseur"=>'SupplierOrder',"projet"=>'Project',"expedition"=>'Shipment',"prelevement_lignes"=>'DirectDebitRecord');
+	/**
+	 * @var array	List of child tables. To know object to delete on cascade.
+	 */
 	protected $childtablesoncascade=array("societe_prices", "societe_log", "societe_address", "product_fournisseur_price", "product_customer_price_log", "product_customer_price", "socpeople", "adherent", "societe_account", "societe_rib", "societe_remise", "societe_remise_except", "societe_commerciaux", "categorie", "notify", "notify_def", "actioncomm");
+
 	public $picto = 'company';
 
 	/**
@@ -467,7 +475,7 @@ class Societe extends CommonObject
 	public $fk_incoterms;
 
 	public $location_incoterms;
-	public $libelle_incoterms;  //Used into tooltip
+	public $label_incoterms;  //Used into tooltip
 
 	// Multicurrency
 	/**
@@ -1268,7 +1276,7 @@ class Societe extends CommonObject
 		$sql .= ', d.code_departement as state_code, d.nom as state';
 		$sql .= ', st.libelle as stcomm';
 		$sql .= ', te.code as typent_code';
-		$sql .= ', i.libelle as libelle_incoterms';
+		$sql .= ', i.libelle as label_incoterms';
 		$sql .= ', sr.remise_client';
 		$sql .= ' FROM '.MAIN_DB_PREFIX.'societe as s';
 		$sql .= ' LEFT JOIN '.MAIN_DB_PREFIX.'c_effectif as e ON s.fk_effectif = e.id';
@@ -1427,7 +1435,7 @@ class Societe extends CommonObject
 				//Incoterms
 				$this->fk_incoterms = $obj->fk_incoterms;
 				$this->location_incoterms = $obj->location_incoterms;
-				$this->libelle_incoterms = $obj->libelle_incoterms;
+				$this->label_incoterms = $obj->label_incoterms;
 
 				// multicurrency
 				$this->fk_multicurrency = $obj->fk_multicurrency;
@@ -3474,7 +3482,7 @@ class Societe extends CommonObject
 		$state_id=0;$state_code=$state_label='';
 		if (! empty($conf->global->MAIN_INFO_SOCIETE_STATE))
 		{
-			$tmp=explode(':',$conf->global->MAIN_INFO_SOCIETE_STATE);
+			$tmp=explode(':', $conf->global->MAIN_INFO_SOCIETE_STATE);
 			$state_id=$tmp[0];
 			if (! empty($tmp[1]))   // If $conf->global->MAIN_INFO_SOCIETE_STATE is "id:code:label"
 			{
@@ -3485,8 +3493,8 @@ class Societe extends CommonObject
 			{
 				dol_syslog("Your state setup use an old syntax. Reedit it using setup area.", LOG_ERR);
 				include_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
-				$state_code=getState($state_id,2,$this->db);  // This need a SQL request, but it's the old feature that should not be used anymore
-				$state_label=getState($state_id,0,$this->db);  // This need a SQL request, but it's the old feature that should not be used anymore
+				$state_code=getState($state_id, 2, $this->db);  // This need a SQL request, but it's the old feature that should not be used anymore
+				$state_label=getState($state_id, 0, $this->db);  // This need a SQL request, but it's the old feature that should not be used anymore
 			}
 		}
 		$this->state_id=$state_id;
@@ -4009,7 +4017,7 @@ class Societe extends CommonObject
 	/**
 	 *  Create a document onto disk according to template module.
 	 *
-	 *	@param	string		$modele			Generator to use. Caller must set it to obj->modelpdf or GETPOST('modelpdf') for example.
+	 *	@param	string		$modele			Generator to use. Caller must set it to obj->modelpdf or GETPOST('modelpdf','alpha') for example.
 	 *	@param	Translate	$outputlangs	objet lang a utiliser pour traduction
 	 *  @param  int			$hidedetails    Hide details of lines
 	 *  @param  int			$hidedesc       Hide description
