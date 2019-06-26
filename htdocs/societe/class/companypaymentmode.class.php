@@ -204,9 +204,9 @@ class CompanyPaymentMode extends CommonObject
 	 */
 	//public $class_element_line = 'CompanyPaymentModeline';
 	/**
-     * @var array	List of child tables. To test if we can delete object.
+	 * @var array  Array of child tables (child tables to delete before deleting a record)
 	 */
-	//protected $childtables=array();
+	//protected $childtables=array('companypaymentmodedet');
 	/**
 	 * @var CompanyPaymentModeLine[]     Array of subtable lines
 	 */

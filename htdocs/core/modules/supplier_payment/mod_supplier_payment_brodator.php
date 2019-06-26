@@ -55,7 +55,7 @@ class mod_supplier_payment_brodator extends ModeleNumRefSupplierPayments
 
 
     /**
-     *  Returns the description of the numbering model
+     *  Renvoi la description du modele de numerotation
      *
      *  @return     string      Texte descripif
      */

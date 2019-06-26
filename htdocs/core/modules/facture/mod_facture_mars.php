@@ -62,7 +62,7 @@ class mod_facture_mars extends ModeleNumRefFactures
 	}
 
 	/**
-	 *  Returns the description of the numbering model
+	 *  Renvoi la description du modele de numerotation
 	 *
 	 *  @return     string      Texte descripif
 	 */

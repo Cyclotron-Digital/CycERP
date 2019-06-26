@@ -55,7 +55,6 @@ if ((isset($_GET["modulepart"]) && $_GET["modulepart"] == 'medias'))
 /**
  * Header empty
  *
- * @ignore
  * @return	void
  */
 function llxHeader()
@@ -64,7 +63,6 @@ function llxHeader()
 /**
  * Footer empty
  *
- * @ignore
  * @return	void
  */
 function llxFooter()

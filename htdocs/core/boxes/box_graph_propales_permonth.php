@@ -141,6 +141,7 @@ class box_graph_propales_permonth extends ModeleBoxes
 					$px1->SetType($datatype1);
 					$px1->SetData($data1);
 					unset($data1);
+					$px1->SetPrecisionY(0);
 					$i=$startyear;$legend=array();
 					while ($i <= $endyear)
 					{
@@ -154,6 +155,7 @@ class box_graph_propales_permonth extends ModeleBoxes
 					$px1->SetYLabel($langs->trans("NumberOfProposals"));
 					$px1->SetShading(3);
 					$px1->SetHorizTickIncrement(1);
+					$px1->SetPrecisionY(0);
 					$px1->SetCssPrefix("cssboxes");
 					$px1->mode='depth';
 					$px1->SetTitle($langs->trans("NumberOfProposalsByMonth"));
@@ -180,6 +182,7 @@ class box_graph_propales_permonth extends ModeleBoxes
 					$px2->SetType($datatype2);
 					$px2->SetData($data2);
 					unset($data2);
+					$px2->SetPrecisionY(0);
 					$i=$startyear;$legend=array();
 					while ($i <= $endyear)
 					{
@@ -193,6 +196,7 @@ class box_graph_propales_permonth extends ModeleBoxes
 					$px2->SetYLabel($langs->trans("AmountOfProposalsHT"));
 					$px2->SetShading(3);
 					$px2->SetHorizTickIncrement(1);
+					$px2->SetPrecisionY(0);
 					$px2->SetCssPrefix("cssboxes");
 					$px2->mode='depth';
 					$px2->SetTitle($langs->trans("AmountOfProposalsByMonthHT"));

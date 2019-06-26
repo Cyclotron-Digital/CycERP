@@ -23,7 +23,7 @@
 /**
  * \file       htdocs/core/modules/bom/mod_bom_advanced.php
  * \ingroup    bom
- * \brief      File containing class for numbering model of bom advanced
+ * \brief      Fichier contenant la classe du modele de numerotation de reference de bom advanced
  */
 
 require_once DOL_DOCUMENT_ROOT .'/core/modules/bom/modules_bom.php';
@@ -52,7 +52,7 @@ class mod_bom_advanced extends ModeleNumRefboms
 
 
     /**
-     *  Returns the description of the numbering model
+     *  Renvoi la description du modele de numerotation
      *
      *  @return     string      Texte descripif
      */

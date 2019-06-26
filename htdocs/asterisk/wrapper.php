@@ -39,7 +39,6 @@ if (! defined('NOREQUIREAJAX'))   define('NOREQUIREAJAX', '1');
 /**
  * Empty header
  *
- * @ignore
  * @return	void
  */
 function llxHeader()
@@ -49,11 +48,9 @@ function llxHeader()
     print '<title>Asterisk redirection from Dolibarr...</title>'."\n";
     print '</head>'."\n";
 }
-
 /**
  * Empty footer
  *
- * @ignore
  * @return	void
  */
 function llxFooter()

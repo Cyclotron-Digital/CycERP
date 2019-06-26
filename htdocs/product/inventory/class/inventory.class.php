@@ -169,13 +169,9 @@ class Inventory extends CommonObject
 	public $class_element_line = 'Inventoryline';
 
 	/**
-	 * @var array	List of child tables. To test if we can delete object.
+	 * @var array  Array of child tables (child tables to delete before deleting a record)
 	 */
-	protected $childtables=array();
-	/**
-	 * @var array	List of child tables. To know object to delete on cascade.
-	 */
-	protected $childtablesoncascade=array('inventorydet');
+	protected $childtables=array('inventorydet');
 
 	/**
 	 * @var InventoryLine[]     Array of subtable lines

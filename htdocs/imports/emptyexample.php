@@ -21,23 +21,12 @@
  *      \brief      Show example of import file
  */
 
-/**
- * This file is a wrapper, so empty header
- *
- * @ignore
- * @return	void
- */
+// This file is a wrapper, so empty header
 function llxHeader()
 {
     print '<html><title>Build an import example file</title><body>';
 }
-
-/**
- * This file is a wrapper, so empty footer
- *
- * @ignore
- * @return	void
- */
+// This file is a wrapper, so empty footer
 function llxFooter()
 {
     print '</body></html>';

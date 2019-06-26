@@ -43,6 +43,12 @@ class MyObject extends CommonObject
 	public $table_element = 'mymodule_myobject';
 
 	/**
+	 * @var string Name of subtable if this object has sub lines
+	 */
+	//public $table_element_line = 'mymodule_myobjectline';
+	//public $fk_element = 'fk_myobject';
+
+	/**
 	 * @var int  Does myobject support multicompany module ? 0=No test on entity, 1=Test with field entity, 2=Test with link by societe
 	 */
 	public $ismultientitymanaged = 0;
@@ -165,12 +171,13 @@ class MyObject extends CommonObject
 	// END MODULEBUILDER PROPERTIES
 
 
+
 	// If this object has a subtable with lines
 
 	/**
 	 * @var int    Name of subtable line
 	 */
-	//public $table_element_line = 'mymodule_myobjectline';
+	//public $table_element_line = 'myobjectdet';
 
 	/**
 	 * @var int    Field with ID of parent key if this field has a parent
@@ -183,14 +190,9 @@ class MyObject extends CommonObject
 	//public $class_element_line = 'MyObjectline';
 
 	/**
-	 * @var array	List of child tables. To test if we can delete object.
+	 * @var array  Array of child tables (child tables to delete before deleting a record)
 	 */
-	//protected $childtables=array();
-
-	/**
-	 * @var array	List of child tables. To know object to delete on cascade.
-	 */
-	//protected $childtablesoncascade=array('mymodule_myobjectdet');
+	//protected $childtables=array('myobjectdet');
 
 	/**
 	 * @var MyObjectLine[]     Array of subtable lines
@@ -531,6 +533,13 @@ class MyObject extends CommonObject
             }
             $linkclose.=' title="'.dol_escape_htmltag($label, 1).'"';
             $linkclose.=' class="classfortooltip'.($morecss?' '.$morecss:'').'"';
+
+            /*
+             $hookmanager->initHooks(array('myobjectdao'));
+             $parameters=array('id'=>$this->id);
+             $reshook=$hookmanager->executeHooks('getnomurltooltip',$parameters,$this,$action);    // Note that $action and $object may have been modified by some hooks
+             if ($reshook > 0) $linkclose = $hookmanager->resPrint;
+             */
         }
         else $linkclose = ($morecss?' class="'.$morecss.'"':'');
 

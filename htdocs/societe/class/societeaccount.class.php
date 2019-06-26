@@ -164,9 +164,9 @@ class SocieteAccount extends CommonObject
 	 */
 	//public $class_element_line = 'societeAccountline';
 	/**
-     * @var array	List of child tables. To test if we can delete object.
+	 * @var array  Array of child tables (child tables to delete before deleting a record)
 	 */
-	//protected $childtables=array();
+	//protected $childtables=array('societe_accountdet');
 	/**
 	 * @var societeAccountLine[]     Array of subtable lines
 	 */

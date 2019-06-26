@@ -59,10 +59,7 @@ class Product extends CommonObject
      */
     public $fk_element='fk_product';
 
-    /**
-     * @var array	List of child tables. To test if we can delete object.
-     */
-    protected $childtables=array('supplier_proposaldet', 'propaldet', 'commandedet', 'facturedet', 'contratdet', 'facture_fourn_det', 'commande_fournisseurdet');
+    protected $childtables=array('supplier_proposaldet', 'propaldet','commandedet','facturedet','contratdet','facture_fourn_det','commande_fournisseurdet');    // To test if we can delete object
 
     /**
      * 0=No test on entity, 1=Test with field entity, 2=Test with link by societe
@@ -4034,6 +4031,13 @@ class Product extends CommonObject
 
             $linkclose.= ' title="'.dol_escape_htmltag($label, 1, 1).'"';
             $linkclose.= ' class="classfortooltip"';
+
+            /*
+            $hookmanager->initHooks(array('productdao'));
+            $parameters=array('id'=>$this->id);
+            $reshook=$hookmanager->executeHooks('getnomurltooltip',$parameters,$this,$action);    // Note that $action and $object may have been modified by some hooks
+            if ($reshook > 0) $linkclose = $hookmanager->resPrint;
+            */
         }
 
         if ($option == 'supplier' || $option == 'category') {

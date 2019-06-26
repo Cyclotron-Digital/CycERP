@@ -60,6 +60,7 @@ if (! $mesg)
     $px->SetYLabel($langs->trans("NbOfOrders"));
     $px->SetShading(3);
 	$px->SetHorizTickIncrement(1);
+	$px->SetPrecisionY(0);
     $px->draw($filename, $fileurl);
 }
 

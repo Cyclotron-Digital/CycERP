@@ -162,7 +162,6 @@ div.buttonpayment input {
     border-bottom: unset;
     font-weight: bold;
     text-transform: uppercase;
-    cursor: pointer;
 }
 input.buttonpaymentcb {
 	background-image: url(<?php echo dol_buildpath($path.'/theme/common/credit_card.png', 1) ?>);
@@ -632,20 +631,20 @@ select.flat.selectlimit {
 .amountpaymentcomplete {
 	color: #008800;
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1.4em;
 }
 .amountremaintopay {
 	color: #880000;
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1.4em;
 }
 .amountremaintopayback {
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1.4em;
 }
 .amountpaymentneutral {
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1.4em;
 }
 .savingdocmask {
 	margin-top: 6px;
@@ -2422,10 +2421,6 @@ tr.nocellnopadd td.nobordernopadding, tr.nocellnopadd td.nocellnopadd
 	margin: 0px 0px 0px 0px;
 }
 
-table.tableforemailform tr td {
-    padding-top: 3px;
-    padding-bottom: 3px;
-}
 
 table.border, table.bordernooddeven, table.dataTable, .table-border, .table-border-col, .table-key-border-col, .table-val-border-col, div.border {
 	border-collapse: collapse !important;

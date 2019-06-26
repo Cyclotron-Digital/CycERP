@@ -1,7 +1,4 @@
 # .scrutinizer.yml
-build:
-    - php-scrutinizer-run
-          
 imports:
     - javascript
     - php

@@ -391,7 +391,7 @@ abstract class CommonObject
 	 * @var string
 	 * @see SetIncoterms()
 	 */
-	public $label_incoterms;
+	public $libelle_incoterms;
 
 	/**
 	 * @var string
@@ -3762,7 +3762,7 @@ abstract class CommonObject
 	{
         // phpcs:enable
 		$out = '';
-		$this->label_incoterms = '';
+		$this->libelle_incoterms = '';
 		if (!empty($this->fk_incoterms))
 		{
 			$sql = 'SELECT code FROM '.MAIN_DB_PREFIX.'c_incoterms WHERE rowid = '.(int) $this->fk_incoterms;
@@ -3835,7 +3835,7 @@ abstract class CommonObject
 				if ($res)
 				{
 					$obj = $this->db->fetch_object($res);
-					$this->label_incoterms = $obj->libelle;
+					$this->libelle_incoterms = $obj->libelle;
 				}
 				return 1;
 			}
@@ -4450,7 +4450,7 @@ abstract class CommonObject
 	 * Common function for all objects extending CommonObject for generating documents
 	 *
 	 * @param 	string 		$modelspath 	Relative folder where generators are placed
-	 * @param 	string 		$modele 		Generator to use. Caller must set it to obj->modelpdf or GETPOST('modelpdf','alpha') for example.
+	 * @param 	string 		$modele 		Generator to use. Caller must set it to obj->modelpdf or GETPOST('modelpdf') for example.
 	 * @param 	Translate 	$outputlangs 	Output language to use
 	 * @param 	int 		$hidedetails 	1 to hide details. 0 by default
 	 * @param 	int 		$hidedesc 		1 to hide product description. 0 by default
@@ -4464,8 +4464,6 @@ abstract class CommonObject
 		global $conf, $langs, $user;
 
 		$srctemplatepath='';
-
-		dol_syslog("commonGenerateDocument modele=".$modele." outputlangs->defaultlang=".(is_object($outputlangs)?$outputlangs->defaultlang:'null'));
 
 		// Increase limit for PDF build
 		$err=error_reporting();
@@ -4507,7 +4505,7 @@ abstract class CommonObject
 		// If generator was found
 		if ($filefound)
 		{
-			global $db;  // Required to solve a conception default making an include of code using $db instead of $this->db just after.
+			global $db;  // Required to solve a conception default in commonstickergenerator.class.php making an include of code using $db
 
 			require_once $file;
 
@@ -6381,7 +6379,6 @@ abstract class CommonObject
 			$out .= '<!-- showOptionalsInput --> ';
 			$out .= "\n";
 
-            $extrafields_collapse_num = '';
 			$e = 0;
 			foreach($extrafields->attributes[$this->table_element]['label'] as $key=>$label)
 			{
@@ -6441,20 +6438,6 @@ abstract class CommonObject
 
 				if ($extrafields->attributes[$this->table_element]['type'][$key] == 'separate')
 				{
-                    $extrafields_collapse_num = '';
-                    $extrafield_param = $extrafields->attributes[$this->table_element]['param'][$key];
-                    if (!empty($extrafield_param) && is_array($extrafield_param)) {
-                        $extrafield_param_list = array_keys($extrafield_param['options']);
-
-                        if (count($extrafield_param_list)>0) {
-                            $extrafield_collapse_display_value = intval($extrafield_param_list[0]);
-
-                            if ($extrafield_collapse_display_value==1 || $extrafield_collapse_display_value==2) {
-                                $extrafields_collapse_num = $extrafields->attributes[$this->table_element]['pos'][$key];
-                            }
-                        }
-                    }
-
 					$out .= $extrafields->showSeparator($key, $this);
 				}
 				else
@@ -6474,7 +6457,7 @@ abstract class CommonObject
 
 					$html_id = !empty($this->id) ? 'extrarow-'.$this->element.'_'.$key.'_'.$this->id : '';
 
-					$out .= '<tr id="'.$html_id.'" '.$csstyle.' class="'.$class.$this->element.'_extras_'.$key.' trextrafields_collapse'.$extrafields_collapse_num.'" '.$domData.' >';
+					$out .= '<tr id="'.$html_id.'" '.$csstyle.' class="'.$class.$this->element.'_extras_'.$key.'" '.$domData.' >';
 
 					if (! empty($conf->global->MAIN_EXTRAFIELDS_USE_TWO_COLUMS) && ($e % 2) == 0)
 					{
@@ -6536,7 +6519,7 @@ abstract class CommonObject
 				    jQuery(document).ready(function() {
 				    	function showOptions(child_list, parent_list)
 				    	{
-				    		var val = $("select[name=\""+parent_list+"\"]").val();
+				    		var val = $("select[name=\"options_"+parent_list+"\"]").val();
 				    		var parentVal = parent_list + ":" + val;
 							if(val > 0) {
 					    		$("select[name=\""+child_list+"\"] option[parent]").hide();
@@ -7507,7 +7490,7 @@ abstract class CommonObject
 
 		$this->db->begin();
 
-		if ($forcechilddeletion)	// Force also delete of childtables that should lock deletion in standard case when option force is off
+		if ($forcechilddeletion)
 		{
 			foreach($this->childtables as $table)
 			{
@@ -7532,20 +7515,6 @@ abstract class CommonObject
 				$this->errors[]=$this->error;
 				$this->db->rollback();
 				return 0;
-			}
-		}
-
-		// Delete cascade first
-		foreach($this->childtablesoncascade as $table)
-		{
-			$sql = 'DELETE FROM '.MAIN_DB_PREFIX.$table.' WHERE '.$this->fk_element.' = '.$this->id;
-			$resql = $this->db->query($sql);
-			if (! $resql)
-			{
-				$this->error=$this->db->lasterror();
-				$this->errors[]=$this->error;
-				$this->db->rollback();
-				return -1;
 			}
 		}
 

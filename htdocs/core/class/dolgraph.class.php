@@ -61,6 +61,8 @@ class DolGraph
 	public $MinValue=0;
 	public $SetShading=0;
 
+	public $PrecisionY=-1;
+
 	public $horizTickIncrement=-1;
 	public $SetNumXTicks=-1;
 	public $labelInterval=-1;
@@ -114,6 +116,7 @@ class DolGraph
 			if (! $isgdinstalled)
 			{
 				$this->error="Error: PHP GD module is not available. It is required to build graphics.";
+				return -1;
 			}
 		}
 
@@ -139,11 +142,11 @@ class DolGraph
 	 *
 	 * @param 	float	$which_prec		Precision
 	 * @return 	boolean
-	 * @deprecated
 	 */
 	public function SetPrecisionY($which_prec)
 	{
         // phpcs:enable
+		$this->PrecisionY = $which_prec;
 		return true;
 	}
 
@@ -888,7 +891,6 @@ class DolGraph
 	private function draw_jflot($file, $fileurl)
 	{
         // phpcs:enable
-		global $langs;
 
 		dol_syslog(get_class($this)."::draw_jflot this->type=".join(',', $this->type)." this->MaxValue=".$this->MaxValue);
 

@@ -313,9 +313,8 @@ if ($rowid && $action != 'edit')
     print '<tr>';
     print '<td class="titlefield">'.$langs->trans("Type").'</td>';
     print '<td class="valeur">';
-    if ($object->fk_type > 0 || $adh->typeid > 0) {
-    	$typeid = ($object->fk_type > 0 ? $object->fk_type : $adh->typeid);
-    	$adht->fetch($typeid);
+    if (! empty($object->fk_type) ) {
+        $adht->fetch($object->fk_type);
         print $adht->getNomUrl(1);
     } else {
         print $langs->trans("NoType");
@@ -346,7 +345,7 @@ if ($rowid && $action != 'edit')
     // Amount
     print '<tr><td>'.$langs->trans("Amount").'</td><td class="valeur">'.price($object->amount).'</td></tr>';
 
-    // Label
+    // Amount
     print '<tr><td>'.$langs->trans("Label").'</td><td class="valeur">'.$object->note.'</td></tr>';
 
 	// Bank line

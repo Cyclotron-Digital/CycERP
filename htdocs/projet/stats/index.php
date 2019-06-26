@@ -115,6 +115,7 @@ $px->SetDataColor(array (
 							220
 					)
 			));
+			$px->SetPrecisionY(0);
 			$px->SetLegend($legend);
 			$px->setShowLegend(0);
 			$px->setShowPointValue($showpointvalue);
@@ -125,7 +126,7 @@ $px->SetDataColor(array (
 			$px->SetShading(3);
 			$px->SetHorizTickIncrement(1);
 			$px->SetCssPrefix("cssboxes");
-			$px->SetType(array (
+$px->SetType(array (
 					'pie'
 			));
 			$px->SetTitle($langs->trans('OpportunitiesStatusForProjects'));
@@ -152,6 +153,7 @@ $mesg = $px1->isGraphKo();
 if (! $mesg)
 {
 	$px1->SetData($data);
+	$px1->SetPrecisionY(0);
 	$i=$startyear;$legend=array();
 	while ($i <= $endyear)
 	{
@@ -165,6 +167,7 @@ if (! $mesg)
 	$px1->SetYLabel($langs->trans("ProjectNbProject"));
 	$px1->SetShading(3);
 	$px1->SetHorizTickIncrement(1);
+	$px1->SetPrecisionY(0);
 	$px1->mode='depth';
 	$px1->SetTitle($langs->trans("ProjectNbProjectByMonth"));
 
@@ -201,6 +204,7 @@ if (! empty($conf->global->PROJECT_USE_OPPORTUNITIES))
 		$px2->SetYLabel($langs->trans("ProjectOppAmountOfProjectsByMonth"));
 		$px2->SetShading(3);
 		$px2->SetHorizTickIncrement(1);
+		$px2->SetPrecisionY(0);
 		$px2->mode='depth';
 		$px2->SetTitle($langs->trans("ProjectOppAmountOfProjectsByMonth"));
 
@@ -237,6 +241,7 @@ if (! empty($conf->global->PROJECT_USE_OPPORTUNITIES))
 		$px3->SetYLabel($langs->trans("ProjectWeightedOppAmountOfProjectsByMonth"));
 		$px3->SetShading(3);
 		$px3->SetHorizTickIncrement(1);
+		$px3->SetPrecisionY(0);
 		$px3->mode='depth';
 		$px3->SetTitle($langs->trans("ProjectWeightedOppAmountOfProjectsByMonth"));
 

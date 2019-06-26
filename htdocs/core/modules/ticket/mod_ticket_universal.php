@@ -53,7 +53,7 @@ class mod_ticket_universal extends ModeleNumRefTicket
 	public $name='Universal';
 
     /**
-     *  Returns the description of the numbering model
+     *  Renvoi la description du modele de numerotation
      *
      *  @return string      Texte descripif
      */

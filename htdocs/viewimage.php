@@ -66,7 +66,6 @@ if (is_numeric($entity)) define("DOLENTITY", $entity);
 /**
  * Header empty
  *
- * @ignore
  * @return	void
  */
 function llxHeader()
@@ -75,7 +74,6 @@ function llxHeader()
 /**
  * Footer empty
  *
- * @ignore
  * @return	void
  */
 function llxFooter()

@@ -93,6 +93,7 @@ $mesg = $px1->isGraphKo();
 if (! $mesg)
 {
     $px1->SetData($data);
+    $px1->SetPrecisionY(0);
     $i=$startyear;$legend=array();
     while ($i <= $endyear)
     {
@@ -107,6 +108,7 @@ if (! $mesg)
     $px1->SetYLabel($langs->trans("NbOfIntervention"));
     $px1->SetShading(3);
     $px1->SetHorizTickIncrement(1);
+    $px1->SetPrecisionY(0);
     $px1->mode='depth';
     $px1->SetTitle($langs->trans("NumberOfInterventionsByMonth"));
 
@@ -147,6 +149,7 @@ if (! $mesg)
     $px2->SetYLabel($langs->trans("AmountOfinterventions"));
     $px2->SetShading(3);
     $px2->SetHorizTickIncrement(1);
+    $px2->SetPrecisionY(0);
     $px2->mode='depth';
     $px2->SetTitle($langs->trans("AmountOfinterventionsByMonthHT"));
 
@@ -186,6 +189,7 @@ if (! $mesg)
     $px3->SetHeight($HEIGHT);
     $px3->SetShading(3);
     $px3->SetHorizTickIncrement(1);
+    $px3->SetPrecisionY(0);
     $px3->mode='depth';
     $px3->SetTitle($langs->trans("AmountAverage"));
 
